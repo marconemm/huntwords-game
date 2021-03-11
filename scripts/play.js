@@ -29,9 +29,13 @@ const createTable = size => {
     return result;
 }// createTable(size)
 
-const fillTable = () => {
-    const table = createTable(10);
-    const raffledWordsList = raffleWords(3);
+const selectDifficulty = level => {
+
+}// selectDifficulty(level)
+
+const fillTable = (table, raffledWordsList) => {
+    // const table = createTable(10);
+    // const raffledWordsList = raffleWords(3);
     const raffledLinesList = [];
 
     while (raffledLinesList.length < raffledWordsList.length) { //ensures that the "lines raffling" never will contains double values.
@@ -46,9 +50,8 @@ const fillTable = () => {
     for (let raffle = 0; raffle < raffledWordsList.length; raffle++) {
 
         const line = raffledLinesList[raffle];
-        const splitedWord = raffledWordsList[raffle].split("");
+        table[line] = raffledWordsList[raffle].split("");
 
-        table[line] = splitedWord;
     }
 
     for (let line = 0; line < table.length; line++) {
@@ -60,11 +63,47 @@ const fillTable = () => {
             }
         }
     }
+    // console.log(table);
+}// fillTable(raffledWordsList)
+// console.log(fillTable());
 
-    console.log(table);
+/**
+ * 
+ *  DOM manipulation:
+ * 
+ **/
 
-}// fillTable()
+const renderHTML = () => {
+    const wordsToHunt = document.getElementById("wordsToHunt");
+    const raffledWordsList = raffleWords(3);
+    const table = createTable(10);
 
-console.log(fillTable());
-// console.log((getRandomValue(9) - 1) + 1);
-// console.log(createTable(100));
+    for (let i = 0; i < raffledWordsList.length; i++) {
+        const li = document.createElement("li");
+        li.innerText = raffledWordsList[i];
+        wordsToHunt.appendChild(li);
+    }
+
+    fillTable(table, raffledWordsList);
+
+    const tableBody = document.getElementById("wordsTable");
+    for (let row = 0; row < table.length; row++) {
+
+        const tableRow = table[row];
+
+        for (let column = 0; column < tableRow.length; column++) {
+            const letterContainer = document.createElement("div");
+            letterContainer.classList.add("displayFlex");
+            letterContainer.classList.add("letterContainer");
+
+            letterContainer.innerText = tableRow[column];
+            tableBody.appendChild(letterContainer);
+        }
+
+    }
+
+
+
+
+}// renderHTML()
+renderHTML();
