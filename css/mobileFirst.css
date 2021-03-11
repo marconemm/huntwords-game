@@ -1,0 +1,166 @@
+/*
+Theme Name: Katas 3
+Author: Kenzie Academy
+Author URI: kenzie.com.br;
+Version: 1.0
+ 
+-----------
+STRUCTURE:
+-----------
+**** VARABLES DECLARATION
+**** GENREAL CONFIG
+**** BODY
+**** HEADER
+**** HOME PAGE
+**** BÔNUS
+**** FOOTER
+**** @media
+*/
+
+/* VARABLES DECLARATION: */
+:root {
+  /* --color-text: #f1faee;
+  --color-main: #e63946; */
+  --color-text: #1d3557;
+  --color-text-footer: #f1faee;
+  --color-main: #a8dadc;
+  --color-background: #e63946;
+}
+
+/* GENERAL CONFIG: */
+.displayFlex {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.italic {
+  font-style: italic;
+}
+
+/*BODY: */
+body {
+  width: 100vw;
+  min-height: 100vh;
+  height: fit-content;
+  font-family: "Courier New", Courier, monospace;
+  color: var(--color-text);
+  background-color: var(--color-main);
+  margin: 10px auto 0;
+}
+
+/*HEADER:*/
+h1,
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+p {
+  text-align: justify;
+  margin-bottom: 10px;
+}
+
+main {
+  width: 90%;
+  margin: 0 auto;
+}
+#resultList > li {
+  border: 2px solid var(--color-text-footer);
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: justify;
+  min-height: 100px;
+  height: fit-content;
+}
+
+ul.displayFlex {
+  justify-content: stretch;
+  border: 5px outset var(--color-text-footer);
+  padding: 5px;
+}
+/*MAIN PAGE: */
+
+/* BONUS: */
+#bonusContainer {
+  margin: 0 auto;
+  width: 85%;
+  margin-bottom: 20px;
+}
+section.displayFlex {
+  justify-content: start;
+}
+.bonus__retangle {
+  width: 100px;
+  height: 20px;
+  background-color: gray;
+  margin: 2px;
+}
+.bonus__retangle--red {
+  background-color: red;
+}
+
+/*FOOTER: */
+footer {
+  width: 100%;
+  background-color: var(--color-background);
+  margin-top: 10px;
+  padding-top: 10px;
+  color: var(--color-text-footer);
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.8rem;
+}
+#footer__author {
+  font-weight: bold;
+}
+#footer__date,
+time {
+  font-style: italic;
+}
+.footer__logo {
+  font-size: 1rem;
+  text-decoration: none;
+}
+#footer__nav {
+  margin-top: 5px;
+  font-size: 1.5rem;
+}
+.fa-github {
+  color: var(--color-text-footer);
+}
+.fa-linkedin {
+  color: #0179b2;
+}
+.fa-facebook-square {
+  color: #3c5a99;
+}
+.fa-gitlab {
+  color: var(--color-text-footer);
+}
+
+/*@media: */
+@media only screen and (min-width: 800px) {
+  /* GENERAL CONFIG: */
+  body {
+    max-width: 1000px;
+  }
+
+  /*MAIN*/
+  aside {
+    min-height: 30px;
+  }
+
+  /*FOOTER: */
+  footer {
+    width: 50%;
+  }
+  footer.displayFlex {
+    font-size: 0.7rem;
+    flex-flow: column nowrap;
+  }
+  .footer__logo {
+    font-size: 1.5rem;
+  }
+}
