@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>14 - Entrega: Katas de JavaScript 3</title>
+    <title>Caça Palavras</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/mobileFirst.css" />
 </head>
@@ -12,36 +12,29 @@
 <body>
 
     <!-- MAIN -->
-    <main class="displayFlex">
+    <main class="displayFlex displayFlex-col">
 
         <!-- HEADER -->
         <header>
-            <h1>14 - Entrega: Katas de JavaScript 3:</h1>
+            <h1>Caça Palavras</h1>
         </header>
 
         <!-- MAIN CONTENT -->
-        <p>Nesse katas nós não vamos utilizar métodos de iteração de array <strong>(forEach, map, filter, reduce,
-                sort...)</strong> e nem
-            <strong>(math min, math max)</strong>.</p>
-        <p>Utilizaremos apenas estruturas de repetição como <strong>(while, for ou do while)</strong> e suas funções
-            devem utilizar <code>return</code> para retornar os resultados solicitados.</p>
+        <ol class="displayFlex" id="wordsToHunt">
+            <p>No quadro abaixo, encontre as <span>3</span> palavras a seguir:</p>
+        </ol>
 
-        <!-- RESULTS -->
-        <h2>Exibindo resultados:</h2>
-        <ul id="resultList">
+        <!-- WORDS TABLE -->
+        <section class="displayGrid" id="wordsTable">
+        </section>
 
-        </ul>
+
     </main>
-    
-    <!-- BÔNUS -->
-    <aside id="bonusContainer">
-        <h2>Bônus:</h2>
-    </aside>
 
     <!-- FOOTER -->
     <footer class="displayFlex">
         <span id="footer__author">Marcone Melo Mendonça</span> - <span id="footer__date">Itaquitinga - PE, <time
-                datetime="2021-03-10">10 de
+                datetime="2021-03-11">11 de
                 março de
                 2021.</time></span>
         <nav id="footer__nav">
