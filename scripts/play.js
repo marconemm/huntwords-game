@@ -67,14 +67,14 @@ const fillTable = (table, raffledWordsList) => {
     }
 
     for (let row = 0; row < table.length; row++) {
-        
+
         for (let column = 0; column < table.length; column++) {
 
             if (table[row][column] === "")
                 table[row][column] = getRandomLetter();
 
             else if (table[row].length < table.length) { //in case of if the raffle word size is smaller than the table size:
-                
+
                 do {
                     if (getRandomValue(table[row].length) % 2 === 0)
                         table[row].push(getRandomLetter());
@@ -128,18 +128,29 @@ const renderHTML = () => {
         }
 
     }
-
-
-
-
 };// renderHTML()
 
 renderHTML();
 let seekedWord = "";
-const selectedLettersList = [];
-const wordsToHuntListElem = document.querySelectorAll("#wordsToHunt > li");
+
+const checkResult = () => {
+
+    const score = raffledWordsList.reduce((accumulator, word) => {
+        if (word.isLocated)
+            accumulator++;
+
+        return accumulator;
+    }, 0);
+
+    if (score === raffledWordsList.length)
+        return true;
+
+    return false;
+
+};// checkResult()
 
 wordsTableElem.addEventListener("click", evt => {
+    const wordsToHuntListElem = document.querySelectorAll("#wordsToHunt > li");
     const target = evt.target;
 
     if (!target.classList.contains("selected")) {
@@ -148,7 +159,7 @@ wordsTableElem.addEventListener("click", evt => {
 
         const wordLocated = raffledWordsList.find(raffleWrod => raffleWrod.value === seekedWord);
 
-        if (!wordLocated.isLocated) {
+        if (wordLocated && !wordLocated.isLocated) {
 
             wordLocated.isLocated = true;
 
@@ -158,6 +169,11 @@ wordsTableElem.addEventListener("click", evt => {
             });
 
             seekedWord = "";
+
+            if (checkResult()) {
+                const endScreenElem = document.querySelector('div[data-js="endScreen"]');
+                endScreenElem.classList.toggle("hidden");
+            }
         }
     }
     else {
