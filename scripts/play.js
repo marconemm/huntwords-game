@@ -1,7 +1,9 @@
 import { wordsColectionList, lettersCollection } from "./wordsDB.js";
 
-const getRandomValue = limit =>
-    Math.round((Math.random() * limit));
+const getRandomValue = limit => {
+    // console.log(limit);
+    return Math.round((Math.random() * limit));
+}
 
 const getRandomValueIntoList = array =>
     (getRandomValue(array.length - 1) - 1) + 1; // Getting a random line between 0 and ("table" length - 1).
@@ -9,11 +11,11 @@ const getRandomValueIntoList = array =>
 const raffleWords = (qty) => {
     const result = [];
     for (let i = 0; i < qty; i++) {
-        const raffle = getRandomValue(1000);
+        const raffle = getRandomValue(wordsColectionList.length);
         result.push(wordsColectionList[raffle])
     }
     return result;
-}// raffleWords(qty)
+};// raffleWords(qty)
 
 const createTable = size => {
     const result = [];
@@ -27,15 +29,19 @@ const createTable = size => {
     }
 
     return result;
-}// createTable(size)
+};// createTable(size)
+
+const getRandomLetter = () => {
+    const randomValue = getRandomValueIntoList(lettersCollection);
+
+    return lettersCollection[randomValue];
+};//getRandomLetter()
 
 const selectDifficulty = level => {
 
-}// selectDifficulty(level)
+};// selectDifficulty(level)
 
 const fillTable = (table, raffledWordsList) => {
-    // const table = createTable(10);
-    // const raffledWordsList = raffleWords(3);
     const raffledLinesList = [];
 
     while (raffledLinesList.length < raffledWordsList.length) { //ensures that the "lines raffling" never will contains double values.
@@ -56,15 +62,17 @@ const fillTable = (table, raffledWordsList) => {
 
     for (let line = 0; line < table.length; line++) {
         const word = table[line];
-        for (let column = 0; column < word.length; column++) {
-            if (word[column] === "") {
-                const randomValue = getRandomValueIntoList(lettersCollection);
-                word[column] = lettersCollection[randomValue];
+        for (let column = 0; column < table.length; column++) {
+            if (word[column] === "")
+                word[column] = getRandomLetter();
+            else if (word.length < table.length) { //in case of if the raffle word size is smaller than the table size:
+                for (let letterIndex = word.length; letterIndex < table.length; letterIndex++)
+                    word[letterIndex] = getRandomLetter();
             }
         }
     }
     // console.log(table);
-}// fillTable(raffledWordsList)
+};// fillTable(raffledWordsList)
 // console.log(fillTable());
 
 /**
@@ -105,5 +113,5 @@ const renderHTML = () => {
 
 
 
-}// renderHTML()
+};// renderHTML()
 renderHTML();

@@ -1,6 +1,6 @@
 # Caça Palavras
 
-#### *Status do Projeto:* **Em construção.** :hammer::wrench:
+#### *Status do Projeto:* 🚧 **Em construção...**  🚧
 
 ### Features:
 - [x] Interface básica;
