@@ -24,10 +24,6 @@ STRUCTURE:
   font-family: llPixel;
 }
 @font-face {
-  src: url("../fonts/Gameboi95.ttf");
-  font-family: "Game Boy 95";
-}
-@font-face {
   src: url("../fonts/SigmarOne-Regular.ttf");
   font-family: "Sigmar One";
 }
@@ -40,6 +36,7 @@ STRUCTURE:
   --color-text-footer: #00296b;
   --color-main: #003f88;
   --color-background: #fdc500;
+  --font-family-sigmaOne: "Sigmar One", "Courier New", Courier, monospace;
 }
 
 /* GENERAL CONFIG: */
@@ -74,7 +71,6 @@ body {
   font-family: "Courier New", Courier, monospace;
   color: var(--color-text);
   background-color: var(--color-main);
-  margin: 10px auto 0;
   background: linear-gradient(to bottom, #00296b 10%, #e5e5e5 75%, #fdc500 85%);
 }
 
@@ -91,33 +87,30 @@ h1 {
 #wordsToHunt,
 #wordsToHunt > li {
   width: 90%;
-  flex-flow: row nowrap;
 }
 #wordsToHunt > li {
   border: 2px inset var(--color-background);
   text-align: center;
   padding: 5px 0;
-  margin: 0 5px;
-  font-family: "Game Boy 95", "Courier New", Courier, monospace;
+  margin: 5px 0px;
+  font-family: var(--font-family-sigmaOne);
   box-shadow: 3px 3px 6px 2px var(--color-text);
+  flex: 1 1 100px;
 }
 p {
   width: 90%;
   margin-bottom: 10px;
 }
 #wordsTable {
-  width: 90vw;
+  /* width: 90vw; */
+  width: 90%;
   border: 2px outset var(--color-background);
   box-shadow: 3px 3px 6px 2px var(--color-text);
   margin: 30px auto;
   text-transform: uppercase;
-  font-family: "Sigmar One", "Courier New", Courier, monospace;
+  font-family: var(--font-family-sigmaOne);
   font-size: 1.5rem;
   color: var(--color-text-footer);
-}
-.letterContainer {
-  width: 8vw;
-  height: 5.5vh;
 }
 
 /*FOOTER: */
@@ -163,21 +156,31 @@ time {
 @media only screen and (min-width: 800px) {
   /* GENERAL CONFIG: */
   body {
-    max-width: 1000px;
+    width: 80%;
+    margin: 0 auto;
   }
 
   /*MAIN*/
-  aside {
-    min-height: 30px;
+  p {
+    text-align: center;
   }
-
+  #wordsToHunt > li {
+    margin: 5px 40px;
+  }
   /*FOOTER: */
   footer {
     width: 50%;
   }
   footer.displayFlex {
     font-size: 0.7rem;
-    flex-flow: column nowrap;
+    flex-flow: row wrap;
+  }
+  #footer__author {
+    flex: 1 1 200px;
+  }
+  #footer__date::before {
+    content: "-";
+    margin-right: 30px;
   }
   .footer__logo {
     font-size: 1.5rem;
