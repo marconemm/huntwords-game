@@ -9,6 +9,7 @@ Version: 1.0
 -----------
 STRUCTURE:
 -----------
+**** @font-face
 **** VARABLES DECLARATION
 **** GENREAL CONFIG
 **** BODY
@@ -18,14 +19,27 @@ STRUCTURE:
 **** @media
 */
 
+@font-face {
+  src: url("../fonts/LLPIXEL3.ttf");
+  font-family: llPixel;
+}
+@font-face {
+  src: url("../fonts/Gameboi95.ttf");
+  font-family: "Game Boy 95";
+}
+@font-face {
+  src: url("../fonts/SigmarOne-Regular.ttf");
+  font-family: "Sigmar One";
+}
+
 /* VARABLES DECLARATION: */
 :root {
   /* --color-text: #f1faee;
   --color-main: #e63946; */
-  --color-text: #1d3557;
-  --color-text-footer: #f1faee;
-  --color-main: #a8dadc;
-  --color-background: #e63946;
+  --color-text: #e5e5e5;
+  --color-text-footer: #00296b;
+  --color-main: #003f88;
+  --color-background: #fdc500;
 }
 
 /* GENERAL CONFIG: */
@@ -61,22 +75,46 @@ body {
   color: var(--color-text);
   background-color: var(--color-main);
   margin: 10px auto 0;
+  background: linear-gradient(to bottom, #00296b 10%, #e5e5e5 75%, #fdc500 85%);
 }
 
 /*HEADER:*/
 
+h1 {
+  font-family: llPixel, "Courier New", Courier, monospace;
+  margin: 5px auto 30px;
+  text-shadow: 4px 5px 4px var(--color-text-footer);
+  color: var(--color-background);
+}
+
 /*MAIN PAGE: */
-/* main {
+#wordsToHunt,
+#wordsToHunt > li {
   width: 90%;
-} */
+  flex-flow: row nowrap;
+}
+#wordsToHunt > li {
+  border: 2px inset var(--color-background);
+  text-align: center;
+  padding: 5px 0;
+  margin: 0 5px;
+  font-family: "Game Boy 95", "Courier New", Courier, monospace;
+  box-shadow: 3px 3px 6px 2px var(--color-text);
+}
+p {
+  width: 90%;
+  margin-bottom: 10px;
+}
 #wordsTable {
   width: 90vw;
   border: 2px outset var(--color-background);
   box-shadow: 3px 3px 6px 2px var(--color-text);
-  margin: 30px 5vw 30px 0;
+  margin: 30px auto;
   text-transform: uppercase;
+  font-family: "Sigmar One", "Courier New", Courier, monospace;
+  font-size: 1.5rem;
+  color: var(--color-text-footer);
 }
-
 .letterContainer {
   width: 8vw;
   height: 5.5vh;
