@@ -69,9 +69,12 @@ const fillTable = (table, raffledWordsList) => {
     for (let row = 0; row < table.length; row++) {
         
         for (let column = 0; column < table.length; column++) {
+
             if (table[row][column] === "")
                 table[row][column] = getRandomLetter();
+
             else if (table[row].length < table.length) { //in case of if the raffle word size is smaller than the table size:
+                
                 do {
                     if (getRandomValue(table[row].length) % 2 === 0)
                         table[row].push(getRandomLetter());
@@ -79,6 +82,7 @@ const fillTable = (table, raffledWordsList) => {
                         table[row] = [getRandomLetter(), ...table[row]];
 
                 } while (table[row].length < table.length);
+
             }
             else
                 break;
@@ -161,8 +165,5 @@ wordsTableElem.addEventListener("click", evt => {
         target.classList.remove("selected");
         seekedWord = seekedWord.slice(0, seekedWord.length - 1);
     }
-
-    // console.log(raffledWordsList);
-    // console.log(selectedLettersWord);
 });
 

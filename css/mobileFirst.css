@@ -37,6 +37,7 @@ STRUCTURE:
   --color-main: #003f88;
   --color-background: #fdc500;
   --font-family-sigmaOne: "Sigmar One", "Courier New", Courier, monospace;
+  --font-family-llPixel: llPixel, "Courier New", Courier, monospace;
 }
 
 /* GENERAL CONFIG: */
@@ -63,9 +64,12 @@ STRUCTURE:
   background: #99582a;
   color: #ffe6a7;
 }
-.located::after{
+.located::after {
   content: " - OK!";
   color: var(--color-background);
+}
+.hidden {
+  display: none;
 }
 
 /*BODY: */
@@ -107,7 +111,7 @@ p {
   margin-bottom: 10px;
 }
 #wordsTable {
-  /* width: 90vw; */
+  position: relative;
   width: 90%;
   border: 2px outset var(--color-background);
   box-shadow: 3px 3px 6px 2px var(--color-text);
@@ -116,6 +120,17 @@ p {
   font-family: var(--font-family-sigmaOne);
   font-size: 1.5rem;
   color: var(--color-text-footer);
+}
+div[data-js="endScreen"] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(253, 197, 0, 0.7);
+  text-align: center;
+  font-family: var(--font-family-llPixel);
+  text-transform: uppercase;
 }
 
 /*FOOTER: */
