@@ -12,7 +12,13 @@ const raffleWords = (qty) => {
     const result = [];
     for (let i = 0; i < qty; i++) {
         const raffle = getRandomValue(wordsColectionList.length);
-        result.push(wordsColectionList[raffle])
+
+        const word = {
+            isLocated: false,
+            value: wordsColectionList[raffle]
+        };
+
+        result.push(word);
     }
     return result;
 };// raffleWords(qty)
@@ -56,39 +62,47 @@ const fillTable = (table, raffledWordsList) => {
     for (let raffle = 0; raffle < raffledWordsList.length; raffle++) {
 
         const line = raffledLinesList[raffle];
-        table[line] = raffledWordsList[raffle].split("");
+        table[line] = raffledWordsList[raffle].value.split("");
 
     }
 
-    for (let line = 0; line < table.length; line++) {
-        const word = table[line];
+    for (let row = 0; row < table.length; row++) {
+        
         for (let column = 0; column < table.length; column++) {
-            if (word[column] === "")
-                word[column] = getRandomLetter();
-            else if (word.length < table.length) { //in case of if the raffle word size is smaller than the table size:
-                for (let letterIndex = word.length; letterIndex < table.length; letterIndex++)
-                    word[letterIndex] = getRandomLetter();
+            if (table[row][column] === "")
+                table[row][column] = getRandomLetter();
+            else if (table[row].length < table.length) { //in case of if the raffle word size is smaller than the table size:
+                do {
+                    if (getRandomValue(table[row].length) % 2 === 0)
+                        table[row].push(getRandomLetter());
+                    else
+                        table[row] = [getRandomLetter(), ...table[row]];
+
+                } while (table[row].length < table.length);
             }
+            else
+                break;
         }
     }
     // console.log(table);
 };// fillTable(raffledWordsList)
-// console.log(fillTable());
 
 /**
  * 
  *  DOM manipulation:
  * 
  **/
+const wordsTableElem = document.getElementById("wordsTable");
+const raffledWordsList = raffleWords(3);
+const table = createTable(10);
 
 const renderHTML = () => {
     const wordsToHunt = document.getElementById("wordsToHunt");
-    const raffledWordsList = raffleWords(3);
-    const table = createTable(10);
 
     for (let i = 0; i < raffledWordsList.length; i++) {
         const li = document.createElement("li");
-        li.innerText = raffledWordsList[i];
+        li.dataset.value = raffledWordsList[i].value;
+        li.innerText = raffledWordsList[i].value;
         wordsToHunt.appendChild(li);
     }
 
@@ -101,6 +115,7 @@ const renderHTML = () => {
 
         for (let column = 0; column < tableRow.length; column++) {
             const letterContainer = document.createElement("div");
+            letterContainer.dataset.letter = tableRow[column];
             letterContainer.classList.add("displayFlex");
             letterContainer.classList.add("letterContainer");
 
@@ -114,4 +129,40 @@ const renderHTML = () => {
 
 
 };// renderHTML()
+
 renderHTML();
+let seekedWord = "";
+const selectedLettersList = [];
+const wordsToHuntListElem = document.querySelectorAll("#wordsToHunt > li");
+
+wordsTableElem.addEventListener("click", evt => {
+    const target = evt.target;
+
+    if (!target.classList.contains("selected")) {
+        target.classList.add("selected");
+        seekedWord += target.dataset.letter;
+
+        const wordLocated = raffledWordsList.find(raffleWrod => raffleWrod.value === seekedWord);
+
+        if (!wordLocated.isLocated) {
+
+            wordLocated.isLocated = true;
+
+            wordsToHuntListElem.forEach(word => {
+                if (word.dataset.value === wordLocated.value)
+                    word.classList.add("located")
+            });
+
+            seekedWord = "";
+        }
+    }
+    else {
+
+        target.classList.remove("selected");
+        seekedWord = seekedWord.slice(0, seekedWord.length - 1);
+    }
+
+    // console.log(raffledWordsList);
+    // console.log(selectedLettersWord);
+});
+

@@ -5,6 +5,7 @@
 ### Features:
 - [x] Interface básica;
 - [ ] Seletor de Dificuldade;
+- [ ] Inclusão do cronômetro;
 - [ ] Seletor de palavras.
 
 ### Demonstração:

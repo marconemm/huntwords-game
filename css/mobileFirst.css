@@ -46,11 +46,9 @@ STRUCTURE:
   align-items: center;
   justify-content: space-around;
 }
-
 .displayFlex-col {
   flex-flow: column wrap;
 }
-
 .displayGrid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -58,9 +56,16 @@ STRUCTURE:
   align-items: center;
   justify-content: center;
 }
-
 .italic {
   font-style: italic;
+}
+.selected {
+  background: #99582a;
+  color: #ffe6a7;
+}
+.located::after{
+  content: " - OK!";
+  color: var(--color-background);
 }
 
 /*BODY: */
