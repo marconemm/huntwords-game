@@ -45,9 +45,13 @@ const getRandomLetter = () => {
     return lettersCollection[randomValue];
 };//getRandomLetter()
 
-const selectDifficulty = level => {
-
-};// selectDifficulty(level)
+// const selectDifficulty = level => {
+/**
+ * 
+ *  (to be implemented...)
+ * 
+ *  */
+// };// selectDifficulty(level)
 
 const fillTable = (table, raffledWordsList) => {
     const raffledLinesList = [];
@@ -98,22 +102,21 @@ const fillTable = (table, raffledWordsList) => {
 
 /**
  * 
- *  DOM manipulation:
+ *  DOM manipulation - BEFORE RENDER:
  * 
  **/
-const wordsTableElem = document.getElementById("wordsTable");
-const raffledWordsList = raffleWords(3);
-const wordsTable = createTable(10);
-
 const renderHTML = () => {
 
-    const wordsToHunt = document.getElementById("wordsToHunt");
+    const raffledWordsList = raffleWords(3);
+    const wordsTable = createTable(10);
+    const wordsTableEl = document.getElementById("wordsTable");
+    const wordsToHuntEl = document.getElementById("wordsToHunt");
 
     for (let i = 0; i < raffledWordsList.length; i++) {
         const li = document.createElement("li");
         li.dataset.id = raffledWordsList[i].id;
         li.innerText = raffledWordsList[i].value;
-        wordsToHunt.appendChild(li);
+        wordsToHuntEl.appendChild(li);
     }
 
     fillTable(wordsTable, raffledWordsList);
@@ -136,14 +139,40 @@ const renderHTML = () => {
             letterContainerEl.classList.add("letterContainer");
             letterContainerEl.innerText = letter.value;
 
-            wordsTableElem.appendChild(letterContainerEl);
+            wordsTableEl.appendChild(letterContainerEl);
         }
 
     }
 };// renderHTML()
 
 renderHTML();
-let seekedWord = "";
+/**
+ * 
+ *  DOM manipulation - AFTER RENDER:
+ * 
+ **/
+const letterContainers = document.querySelectorAll("#wordsTable > div");
+// let seekedWord = "";
+
+const fetchWord = (pickedLetters, wordId) => {
+    let result;
+
+    if (!wordId)
+        return undefined;
+
+    const wordsToHuntList = document.querySelectorAll("#wordsToHunt > li");
+    // console.log(wordsToHuntList);
+
+
+    wordsToHuntList.forEach(word => {
+        if (word.dataset.id === wordId) {
+            if (pickedLetters.length === word.innerText.length)
+                result = word.innerText;
+        }
+    });
+
+    return result;
+};// fetchWord(wordId)
 
 const checkResult = () => {
 
@@ -161,37 +190,33 @@ const checkResult = () => {
 
 };// checkResult()
 
-wordsTableElem.addEventListener("click", evt => {
-    const wordsToHuntListElem = document.querySelectorAll("#wordsToHunt > li");
-    const target = evt.target;
+let pickedLetters = "";
+letterContainers.forEach(container => {
+    // console.log(container);
 
-    if (!target.classList.contains("selected")) {
-        target.classList.add("selected");
-        seekedWord += target.dataset.letter;
+    container.addEventListener("click", () => {
 
-        const wordLocated = raffledWordsList.find(raffleWrod => raffleWrod.value === seekedWord);
+        // const wordsToHuntListElem = document.querySelectorAll("#wordsToHunt > li");
 
-        if (wordLocated && !wordLocated.isLocated) {
+        if (!container.classList.contains("selected")) {
 
-            wordLocated.isLocated = true;
+            pickedLetters += container.innerText;
 
-            wordsToHuntListElem.forEach(word => {
-                if (word.dataset.value === wordLocated.value)
-                    word.classList.add("located")
-            });
+            const wordId = container.dataset.word;
+            const isLocated = fetchWord(pickedLetters, wordId);
 
-            seekedWord = "";
+            if (isLocated) {
+                console.log(`Legal! Você encontrou: "${isLocated}"!`);
+            } else
+                console.log(`Você selecionou: "${pickedLetters}". Continue procurando...`);
 
-            if (checkResult()) {
-                const endScreenElem = document.querySelector('div[data-js="endScreen"]');
-                endScreenElem.classList.toggle("hidden");
-            }
+
+
+            container.classList.add("selected");
         }
-    }
-    else {
-
-        target.classList.remove("selected");
-        seekedWord = seekedWord.slice(0, seekedWord.length - 1);
-    }
+        else {
+            container.classList.remove("selected");
+            pickedLetters = pickedLetters.slice(0, pickedLetters.length - 1);
+        }
+    });
 });
-
