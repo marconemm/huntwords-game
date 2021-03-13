@@ -3,10 +3,11 @@
 #### *Status do Projeto:* 🚧 **Em construção...**  🚧
 
 ### Features:
-- [x] Interface básica;
-- [ ] Seletor de Dificuldade;
-- [ ] Inclusão do cronômetro;
-- [ ] Seletor de palavras.
+- [x] Desenvolvido com *MobileFirst*; ( 🆗 - 🤓👍 )
+- [x] Interface básica; ( 🆗 - 🤓👍 )
+- [x] Seletor de palavras; ( 🆗 - 🤓👍 )
+- [ ] Seletor de Dificuldade; e
+- [ ] Inclusão do cronômetro.
 
 ### Demonstração:
 Via GitLab pages, clique [aqui](https://marconemm.gitlab.io/huntwords-game).
