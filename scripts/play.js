@@ -115,6 +115,7 @@ const renderHTML = () => {
     for (let i = 0; i < raffledWordsList.length; i++) {
         const li = document.createElement("li");
         li.dataset.id = raffledWordsList[i].id;
+        li.dataset.islocated = raffledWordsList[i].isLocated;
         li.innerText = raffledWordsList[i].value;
         wordsToHuntEl.appendChild(li);
     }
@@ -163,16 +164,44 @@ const fetchWord = (pickedLetters, wordId) => {
     const wordsToHuntList = document.querySelectorAll("#wordsToHunt > li");
     // console.log(wordsToHuntList);
 
-
     wordsToHuntList.forEach(word => {
+
         if (word.dataset.id === wordId) {
-            if (pickedLetters.length === word.innerText.length)
-                result = word.innerText;
+
+            if (pickedLetters.length === word.innerText.length) {
+
+                let wordLettersList = word.innerText.toLowerCase();
+                pickedLetters = pickedLetters.toLowerCase();
+
+                wordLettersList = wordLettersList.split("");
+                pickedLetters = pickedLetters.split("");
+
+                wordLettersList = wordLettersList.sort();
+                pickedLetters = pickedLetters.sort();
+
+                wordLettersList = wordLettersList.join("");
+                pickedLetters = pickedLetters.join("");
+
+                if (pickedLetters === wordLettersList) {
+                    word.dataset.islocated = true;
+                    word.classList.add("located");
+                    result = word.innerText;
+                }
+            }
         }
     });
 
     return result;
-};// fetchWord(wordId)
+};// fetchWord(pickedLetters, wordId)
+
+const testLog = (isLocated, pickedLetters) => {
+
+    if (isLocated) {
+        console.log(`Legal! Você encontrou: "${isLocated}"!`);
+    } else
+        console.log(`Você selecionou: "${pickedLetters}". Continue procurando...`);
+
+}; // testLog(isLocated, pickedLetters)
 
 const checkResult = () => {
 
@@ -196,8 +225,6 @@ letterContainers.forEach(container => {
 
     container.addEventListener("click", () => {
 
-        // const wordsToHuntListElem = document.querySelectorAll("#wordsToHunt > li");
-
         if (!container.classList.contains("selected")) {
 
             pickedLetters += container.innerText;
@@ -205,18 +232,23 @@ letterContainers.forEach(container => {
             const wordId = container.dataset.word;
             const isLocated = fetchWord(pickedLetters, wordId);
 
-            if (isLocated) {
-                console.log(`Legal! Você encontrou: "${isLocated}"!`);
-            } else
-                console.log(`Você selecionou: "${pickedLetters}". Continue procurando...`);
+            if (isLocated)
+                pickedLetters = "";
 
-
+            // testLog(isLocated, pickedLetters)
 
             container.classList.add("selected");
         }
         else {
+
+            const index = pickedLetters.indexOf(container.innerText);
+
+            pickedLetters = pickedLetters.split("");
+            pickedLetters[index] = "";
+            pickedLetters = pickedLetters.join("");
+            console.log(pickedLetters);
+
             container.classList.remove("selected");
-            pickedLetters = pickedLetters.slice(0, pickedLetters.length - 1);
         }
     });
 });
