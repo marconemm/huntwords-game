@@ -13,12 +13,14 @@ const raffleWords = (qty) => {
     for (let i = 0; i < qty; i++) {
         const raffle = getRandomValue(wordsColectionList.length);
 
-        const word = {
-            isLocated: false,
-            value: wordsColectionList[raffle]
-        };
+        // const word = {
+        //     isLocated: false,
+        //     value: wordsColectionList[raffle]
+        // };
 
-        result.push(word);
+        // result.push(word);
+        result.push(wordsColectionList[raffle]);
+
     }
     return result;
 };// raffleWords(qty)
@@ -71,15 +73,15 @@ const fillTable = (table, raffledWordsList) => {
         for (let column = 0; column < table.length; column++) {
 
             if (table[row][column] === "")
-                table[row][column] = getRandomLetter();
+                table[row][column] = getRandomLetter().value;
 
             else if (table[row].length < table.length) { //in case of if the raffle word size is smaller than the table size:
 
                 do {
                     if (getRandomValue(table[row].length) % 2 === 0)
-                        table[row].push(getRandomLetter());
+                        table[row].push(getRandomLetter().value);
                     else
-                        table[row] = [getRandomLetter(), ...table[row]];
+                        table[row] = [getRandomLetter().value, ...table[row]];
 
                 } while (table[row].length < table.length);
 
@@ -88,7 +90,7 @@ const fillTable = (table, raffledWordsList) => {
                 break;
         }
     }
-    // console.log(table);
+    console.log(table);
 };// fillTable(raffledWordsList)
 
 /**
@@ -118,12 +120,14 @@ const renderHTML = () => {
         const tableRow = table[row];
 
         for (let column = 0; column < tableRow.length; column++) {
+
             const letterContainer = document.createElement("div");
+
             letterContainer.dataset.letter = tableRow[column];
             letterContainer.classList.add("displayFlex");
             letterContainer.classList.add("letterContainer");
-
             letterContainer.innerText = tableRow[column];
+            
             tableBody.appendChild(letterContainer);
         }
 
