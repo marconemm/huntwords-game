@@ -12,6 +12,7 @@
 - [x] Desenvolvido com *MobileFirst*; ( 🆗 - 🤓👍 )
 - [x] Interface básica; ( 🆗 - 🤓👍 )
 - [x] Seletor de palavras; ( 🆗 - 🤓👍 )
+- [x] Animação da *caixa de letras*; ( 🆗 - 🤓👍 )
 - [ ] Seletor de Dificuldade; e
 - [ ] Inclusão do cronômetro.
 
