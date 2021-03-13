@@ -2,7 +2,13 @@
 
 #### *Status do Projeto:* 🚧 **Em construção...**  🚧
 
-### Features:
+## Apresentação:
+* Este projeto é o resultado do **desafio de final de Sprint** do curso de ***#fullStack*** da [Kenzie Academy Brasil](https://kenzie.com.br/).
+* * ### Detalhes: 
+      * Desenvolvido no final da *Sprint 3*; e
+      * Linguagem aplicada: ***javaSpript*** *puro*.
+
+### Recursos:
 - [x] Desenvolvido com *MobileFirst*; ( 🆗 - 🤓👍 )
 - [x] Interface básica; ( 🆗 - 🤓👍 )
 - [x] Seletor de palavras; ( 🆗 - 🤓👍 )

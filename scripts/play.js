@@ -109,7 +109,7 @@ const raffledWordsList = raffleWords(3);
 const btnRestartEl = document.querySelector('button[data-js="restart"]');
 
 btnRestartEl.addEventListener("click", () => {
-    location.reload(); 
+    location.reload();
 });
 
 const renderHTML = () => {
@@ -249,12 +249,14 @@ letterContainers.forEach(container => {
                 if (checkResult()) {
                     const endScreenEl = document.querySelector('div[data-js="endScreen"]');
                     endScreenEl.classList.remove("hidden");
+                    endScreenEl.focus();
                 }
 
                 pickedLetters = "";
             }
 
-            container.classList.add("selected");
+            if (container.dataset.js !== "endScreen")
+                container.classList.add("selected");
 
         }
         else {
@@ -270,5 +272,3 @@ letterContainers.forEach(container => {
         }
     });
 });
-
-

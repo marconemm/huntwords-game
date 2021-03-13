@@ -10,6 +10,7 @@ Version: 1.0
 STRUCTURE:
 -----------
 **** @font-face
+**** @keyframes
 **** VARABLES DECLARATION
 **** GENREAL CONFIG
 **** BODY
@@ -28,14 +29,33 @@ STRUCTURE:
   font-family: "Sigmar One";
 }
 
+/* @keyframes: */
+@keyframes selection {
+  0% {
+    transform: scale(1.4, 1.4);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(0.6, 0.6);
+  }
+  75% {
+    transform: scale(0.8, 0.8);
+  }
+  100% {
+    transform: scale(1.4, 1.4);
+  }
+}
+
 /* VARABLES DECLARATION: */
 :root {
-  /* --color-text: #f1faee;
-  --color-main: #e63946; */
-  --color-text: #e5e5e5;
+  --color-white: #e5e5e5;
   --color-text-footer: #00296b;
   --color-main: #003f88;
-  --color-background: #fdc500;
+  --color-yellow: #fdc500;
+  --color-gold: #99582a;
+  --color-cream: #ffe6a7;
   --font-family-sigmaOne: "Sigmar One", "Courier New", Courier, monospace;
   --font-family-llPixel: llPixel, "Courier New", Courier, monospace;
 }
@@ -61,12 +81,14 @@ STRUCTURE:
   font-style: italic;
 }
 .selected {
-  background: #99582a;
-  color: #ffe6a7;
+  background: var(--color-gold);
+  color: var(--color-cream);
+  border-radius: 10px;
+  transition: color 500ms, background 500ms, border-radius 500ms;
 }
 .located::after {
   content: " - OK!";
-  color: var(--color-background);
+  color: var(--color-yellow);
 }
 .hidden {
   display: none;
@@ -78,18 +100,22 @@ body {
   min-height: 100vh;
   height: fit-content;
   font-family: "Courier New", Courier, monospace;
-  color: var(--color-text);
+  color: var(--color-white);
   background-color: var(--color-main);
-  background: linear-gradient(to bottom, #00296b 10%, #e5e5e5 75%, #fdc500 85%);
+  background: linear-gradient(
+    to bottom,
+    var(--color-main) 0%,
+    var(--color-white) 75%,
+    var(--color-yellow) 90%
+  );
 }
 
 /*HEADER:*/
-
 h1 {
   font-family: llPixel, "Courier New", Courier, monospace;
   margin: 5px auto 30px;
   text-shadow: 4px 5px 4px var(--color-text-footer);
-  color: var(--color-background);
+  color: var(--color-yellow);
 }
 
 /*MAIN PAGE: */
@@ -98,12 +124,14 @@ h1 {
   width: 90%;
 }
 #wordsToHunt > li {
-  border: 2px inset var(--color-background);
+  background-color: rgba(0, 41, 107, 0.4);
+  color: var(--color-white);
+  border: 2px inset var(--color-yellow);
   text-align: center;
   padding: 5px 0;
   margin: 5px 10px;
   font-family: var(--font-family-sigmaOne);
-  box-shadow: 3px 3px 6px 2px var(--color-text);
+  box-shadow: 0px 0px 10px 2px var(--color-white);
   flex: 1 1 100px;
 }
 p {
@@ -113,13 +141,25 @@ p {
 #wordsTable {
   position: relative;
   width: 90%;
-  border: 2px outset var(--color-background);
-  box-shadow: 3px 3px 6px 2px var(--color-text);
+  min-height: 450px;
+  border: 2px outset var(--color-yellow);
+  box-shadow: 3px 3px 6px 2px var(--color-white);
   margin: 30px auto;
   text-transform: uppercase;
   font-family: var(--font-family-sigmaOne);
   font-size: 1.5rem;
   color: var(--color-text-footer);
+}
+#wordsTable > div.letterContainer:active {
+  animation: selection 200ms cubic-bezier(0.75, 0.25, 0.4, 1) 2;
+  text-shadow: 3px 3px 5px var(--color-gold);
+  border: 2px dotted var(--color-gold);
+  border-radius: 15px;
+}
+#wordsTable > div.letterContainer:focus {
+  cursor: pointer;
+  transform: scale(1.4, 1.4);
+  transition: transform 5s cubic-bezier(0.73, 0.26, 0.4, 0.93);
 }
 div[data-js="endScreen"] {
   position: absolute;
@@ -127,7 +167,7 @@ div[data-js="endScreen"] {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(253, 197, 0, 0.7);
+  background-color: rgba(253, 197, 0, 0.8);
   text-align: center;
   font-family: var(--font-family-llPixel);
   text-transform: uppercase;
@@ -136,7 +176,7 @@ div[data-js="endScreen"] {
 /*FOOTER: */
 footer {
   width: 100%;
-  background-color: var(--color-background);
+  background-color: var(--color-yellow);
   margin-top: 10px;
   padding-top: 10px;
   color: var(--color-text-footer);
@@ -186,6 +226,21 @@ time {
   }
   #wordsToHunt > li {
     margin: 5px 40px;
+  }
+  #wordsTable > div.letterContainer:focus {
+    animation: selection 200ms cubic-bezier(0.75, 0.25, 0.4, 1) 2;
+    border: 2px dotted var(--color-gold);
+    border-radius: 15px;
+  }
+  #wordsTable > div.letterContainer:hover {
+    animation: selection 200ms cubic-bezier(0.75, 0.25, 0.4, 1) 2;
+    text-shadow: 3px 3px 5px var(--color-gold);
+  }
+  #wordsTable > div.letterContainer.selected:hover {
+    animation: none;
+    background-color: var(--color-cream);
+    color: var(--color-gold);
+    text-shadow: 3px 3px 5px var(--color-main);
   }
   /*FOOTER: */
   footer {
