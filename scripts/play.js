@@ -105,9 +105,15 @@ const fillTable = (table, raffledWordsList) => {
  *  DOM manipulation - BEFORE RENDER:
  * 
  **/
+const raffledWordsList = raffleWords(3);
+const btnRestartEl = document.querySelector('button[data-js="restart"]');
+
+btnRestartEl.addEventListener("click", () => {
+    location.reload(); 
+});
+
 const renderHTML = () => {
 
-    const raffledWordsList = raffleWords(3);
     const wordsTable = createTable(10);
     const wordsTableEl = document.getElementById("wordsTable");
     const wordsToHuntEl = document.getElementById("wordsToHunt");
@@ -155,22 +161,23 @@ renderHTML();
 const letterContainers = document.querySelectorAll("#wordsTable > div");
 // let seekedWord = "";
 
-const fetchWord = (pickedLetters, wordId) => {
+const fetchWord = (pickedLetters, wordElId) => {
+
     let result;
 
-    if (!wordId)
+    if (!wordElId)
         return undefined;
 
     const wordsToHuntList = document.querySelectorAll("#wordsToHunt > li");
     // console.log(wordsToHuntList);
 
-    wordsToHuntList.forEach(word => {
+    wordsToHuntList.forEach(wordEl => {
 
-        if (word.dataset.id === wordId) {
+        if (Number(wordEl.dataset.id) === wordElId) {
 
-            if (pickedLetters.length === word.innerText.length) {
+            if (pickedLetters.length === wordEl.innerText.length) {
 
-                let wordLettersList = word.innerText.toLowerCase();
+                let wordLettersList = wordEl.innerText.toLowerCase();
                 pickedLetters = pickedLetters.toLowerCase();
 
                 wordLettersList = wordLettersList.split("");
@@ -183,9 +190,15 @@ const fetchWord = (pickedLetters, wordId) => {
                 pickedLetters = pickedLetters.join("");
 
                 if (pickedLetters === wordLettersList) {
-                    word.dataset.islocated = true;
-                    word.classList.add("located");
-                    result = word.innerText;
+                    raffledWordsList.forEach(word => {
+                        if (word.id === wordElId) {
+
+                            word.isLocated = true;
+                            wordEl.dataset.islocated = word.isLocated;
+                            wordEl.classList.add("located");
+                            result = word.value;
+                        }
+                    });
                 }
             }
         }
@@ -204,12 +217,11 @@ const testLog = (isLocated, pickedLetters) => {
 }; // testLog(isLocated, pickedLetters)
 
 const checkResult = () => {
-
-    const score = raffledWordsList.reduce((accumulator, word) => {
+    const score = raffledWordsList.reduce((acc, word) => {
         if (word.isLocated)
-            accumulator++;
+            acc++;
 
-        return accumulator;
+        return acc;
     }, 0);
 
     if (score === raffledWordsList.length)
@@ -229,15 +241,21 @@ letterContainers.forEach(container => {
 
             pickedLetters += container.innerText;
 
-            const wordId = container.dataset.word;
+            const wordId = parseInt(container.dataset.word);
             const isLocated = fetchWord(pickedLetters, wordId);
 
-            if (isLocated)
-                pickedLetters = "";
+            if (isLocated) {
 
-            // testLog(isLocated, pickedLetters)
+                if (checkResult()) {
+                    const endScreenEl = document.querySelector('div[data-js="endScreen"]');
+                    endScreenEl.classList.remove("hidden");
+                }
+
+                pickedLetters = "";
+            }
 
             container.classList.add("selected");
+
         }
         else {
 
@@ -252,3 +270,5 @@ letterContainers.forEach(container => {
         }
     });
 });
+
+
