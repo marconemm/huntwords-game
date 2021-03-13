@@ -65,7 +65,11 @@ const fillTable = (table, raffledWordsList) => {
 
         const line = raffledLinesList[raffle];
         table[line] = raffledWordsList[raffle].value.split("");
+        table[line] = table[line].map(letter => {
 
+            return { wordId: raffledWordsList[raffle].id, value: letter };
+
+        });
     }
 
     for (let row = 0; row < table.length; row++) {
@@ -73,24 +77,23 @@ const fillTable = (table, raffledWordsList) => {
         for (let column = 0; column < table.length; column++) {
 
             if (table[row][column] === "")
-                table[row][column] = getRandomLetter().value;
+                table[row][column] = getRandomLetter();
 
             else if (table[row].length < table.length) { //in case of if the raffle word size is smaller than the table size:
 
                 do {
                     if (getRandomValue(table[row].length) % 2 === 0)
-                        table[row].push(getRandomLetter().value);
+                        table[row].push(getRandomLetter());
                     else
-                        table[row] = [getRandomLetter().value, ...table[row]];
+                        table[row] = [getRandomLetter(), ...table[row]];
 
                 } while (table[row].length < table.length);
-
             }
             else
                 break;
         }
     }
-    console.log(table);
+    // console.log(table);
 };// fillTable(raffledWordsList)
 
 /**
@@ -100,35 +103,40 @@ const fillTable = (table, raffledWordsList) => {
  **/
 const wordsTableElem = document.getElementById("wordsTable");
 const raffledWordsList = raffleWords(3);
-const table = createTable(10);
+const wordsTable = createTable(10);
 
 const renderHTML = () => {
+
     const wordsToHunt = document.getElementById("wordsToHunt");
 
     for (let i = 0; i < raffledWordsList.length; i++) {
         const li = document.createElement("li");
-        li.dataset.value = raffledWordsList[i].value;
+        li.dataset.id = raffledWordsList[i].id;
         li.innerText = raffledWordsList[i].value;
         wordsToHunt.appendChild(li);
     }
 
-    fillTable(table, raffledWordsList);
+    fillTable(wordsTable, raffledWordsList);
 
-    const tableBody = document.getElementById("wordsTable");
-    for (let row = 0; row < table.length; row++) {
+    for (let row = 0; row < wordsTable.length; row++) {
 
-        const tableRow = table[row];
+        const tableRow = wordsTable[row];
+        // console.log(tableRow);
 
         for (let column = 0; column < tableRow.length; column++) {
 
-            const letterContainer = document.createElement("div");
+            const letter = tableRow[column];
+            const letterContainerEl = document.createElement("div");
+            // console.log(letter);
 
-            letterContainer.dataset.letter = tableRow[column];
-            letterContainer.classList.add("displayFlex");
-            letterContainer.classList.add("letterContainer");
-            letterContainer.innerText = tableRow[column];
-            
-            tableBody.appendChild(letterContainer);
+            if (letter.wordId)
+                letterContainerEl.dataset.word = letter.wordId;
+
+            letterContainerEl.classList.add("displayFlex");
+            letterContainerEl.classList.add("letterContainer");
+            letterContainerEl.innerText = letter.value;
+
+            wordsTableElem.appendChild(letterContainerEl);
         }
 
     }
