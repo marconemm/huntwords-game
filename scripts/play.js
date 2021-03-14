@@ -98,10 +98,10 @@ const fillTable = (table, raffledWordsList) => {
 };// fillTable(raffledWordsList)
 
 const removeChildNodes = (element) => {
-    debugger
+    
     while (element.lastChild) {
 
-        if (element.lastChild.dataset.js === "endScreen")
+        if (element.lastChild.dataset && element.lastChild.dataset.js === "endScreen")
             return;
 
         element.removeChild(element.lastChild);
@@ -113,7 +113,7 @@ const removeChildNodes = (element) => {
  *  DOM manipulation - BEFORE RENDER:
  * 
  **/
-const raffledWordsList = isMobile() ? raffleWords(3) : raffleWords(10);
+const raffledWordsList = isMobile() ? raffleWords(4) : raffleWords(20);
 const btnRestartEl = document.querySelector('button[data-js="restart"]');
 
 btnRestartEl.addEventListener("click", () => {
@@ -131,10 +131,10 @@ function isMobile() {
 
 const renderHTML = () => {
 
-    const wordsTable = isMobile() ? createTable(12) : createTable(20);
+    const wordsTable = isMobile() ? createTable(14) : createTable(40);
     const wordsToHuntEl = document.getElementById("wordsToHunt");
     const wordsTableEl = document.getElementById("wordsTable");
-
+    
     removeChildNodes(wordsToHuntEl)
     removeChildNodes(wordsTableEl);
 
@@ -187,9 +187,9 @@ window.addEventListener("resize", evt => {
     const delay = Math.abs(Math.round(storedTimeStamp - evt.timeStamp));
     console.log(delay);
 
-    if ((delay > 10000)) { // when the difference between the events triggered is greater than 5s.
-        renderHTML();
-        // console.log("Rendering window...");
+    if ((delay > 10000)) { // when the difference between the events triggered is greater than 10s.
+        location.reload();
+        console.log("Rendering window...");
     }
 
     storedTimeStamp = evt.timeStamp;
