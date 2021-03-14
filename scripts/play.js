@@ -9,19 +9,16 @@ const getRandomValueIntoList = array =>
     (getRandomValue(array.length - 1) - 1) + 1; // Getting a random line between 0 and ("table" length - 1).
 
 const raffleWords = (qty) => {
+    
     const result = [];
+    const wordsToHuntCountEl = document.querySelector('span[data-js="word-count"]');
+    
     for (let i = 0; i < qty; i++) {
-        const raffle = getRandomValue(wordsColectionList.length);
-
-        // const word = {
-        //     isLocated: false,
-        //     value: wordsColectionList[raffle]
-        // };
-
-        // result.push(word);
+        const raffle = getRandomValue(wordsColectionList.length);       
         result.push(wordsColectionList[raffle]);
-
     }
+
+    wordsToHuntCountEl.innerText = qty;
     return result;
 };// raffleWords(qty)
 
@@ -105,7 +102,7 @@ const fillTable = (table, raffledWordsList) => {
  *  DOM manipulation - BEFORE RENDER:
  * 
  **/
-const raffledWordsList = raffleWords(3);
+const raffledWordsList = raffleWords(4);
 const btnRestartEl = document.querySelector('button[data-js="restart"]');
 
 btnRestartEl.addEventListener("click", () => {
@@ -114,7 +111,7 @@ btnRestartEl.addEventListener("click", () => {
 
 const renderHTML = () => {
 
-    const wordsTable = createTable(10);
+    const wordsTable = createTable(13);
     const wordsTableEl = document.getElementById("wordsTable");
     const wordsToHuntEl = document.getElementById("wordsToHunt");
 
@@ -142,7 +139,7 @@ const renderHTML = () => {
             if (letter.wordId)
                 letterContainerEl.dataset.word = letter.wordId;
 
-            letterContainerEl.classList.add("displayFlex");
+            // letterContainerEl.classList.add("displayFlex");
             letterContainerEl.classList.add("letterContainer");
             letterContainerEl.innerText = letter.value;
 
@@ -266,7 +263,7 @@ letterContainers.forEach(container => {
             pickedLetters = pickedLetters.split("");
             pickedLetters[index] = "";
             pickedLetters = pickedLetters.join("");
-            console.log(pickedLetters);
+            // console.log(pickedLetters);
 
             container.classList.remove("selected");
         }

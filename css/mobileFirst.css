@@ -32,10 +32,12 @@ STRUCTURE:
 /* @keyframes: */
 @keyframes selection {
   0% {
-    transform: scale(1.4, 1.4);
+    transform: translate(2px , 2px);
+    /* transform: scale(1.2, 1.2); */
   }
   25% {
-    transform: scale(1, 1);
+    transform: translate(-4px , -4px);
+    /* transform: scale(1, 1); */
   }
   50% {
     transform: scale(0.6, 0.6);
@@ -44,7 +46,7 @@ STRUCTURE:
     transform: scale(0.8, 0.8);
   }
   100% {
-    transform: scale(1.4, 1.4);
+    transform: scale(1.2, 1.2);
   }
 }
 
@@ -58,6 +60,7 @@ STRUCTURE:
   --color-cream: #ffe6a7;
   --font-family-sigmaOne: "Sigmar One", "Courier New", Courier, monospace;
   --font-family-llPixel: llPixel, "Courier New", Courier, monospace;
+  --table-size: 13;
 }
 
 /* GENERAL CONFIG: */
@@ -72,8 +75,8 @@ STRUCTURE:
 }
 .displayGrid {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(var(--table-size), 1fr);
+  grid-template-rows: repeat((var(--table-size)), 1fr);
   align-items: center;
   justify-content: center;
 }
@@ -119,6 +122,9 @@ h1 {
 }
 
 /*MAIN PAGE: */
+span[data-js="word-count"]{
+  font-weight: bold;
+}
 #wordsToHunt,
 #wordsToHunt > li {
   width: 90%;
@@ -158,7 +164,7 @@ p {
 }
 #wordsTable > div.letterContainer:focus {
   cursor: pointer;
-  transform: scale(1.4, 1.4);
+  transform: scale(1.2, 1.2);
   transition: transform 5s cubic-bezier(0.73, 0.26, 0.4, 0.93);
 }
 div[data-js="endScreen"] {
@@ -171,6 +177,12 @@ div[data-js="endScreen"] {
   text-align: center;
   font-family: var(--font-family-llPixel);
   text-transform: uppercase;
+}
+.letterContainer {
+  font-size: 1.2rem;
+  text-align: center;
+  width: calc(90vw / 13);
+  height: fit-content;
 }
 
 /*FOOTER: */
