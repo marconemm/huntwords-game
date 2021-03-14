@@ -97,6 +97,17 @@ const fillTable = (table, raffledWordsList) => {
     // console.log(table);
 };// fillTable(raffledWordsList)
 
+const removeChildNodes = (element) => {
+    debugger
+    while (element.lastChild) {
+
+        if (element.lastChild.dataset.js === "endScreen")
+            return;
+
+        element.removeChild(element.lastChild);
+    }
+}// removeChildNodes(element)
+
 /**
  * 
  *  DOM manipulation - BEFORE RENDER:
@@ -121,8 +132,11 @@ function isMobile() {
 const renderHTML = () => {
 
     const wordsTable = isMobile() ? createTable(12) : createTable(20);
-    const wordsTableEl = document.getElementById("wordsTable");
     const wordsToHuntEl = document.getElementById("wordsToHunt");
+    const wordsTableEl = document.getElementById("wordsTable");
+
+    removeChildNodes(wordsToHuntEl)
+    removeChildNodes(wordsTableEl);
 
     if (isMobile()) {
         wordsTableEl.classList.add("displayGrid--mobile");
@@ -172,11 +186,11 @@ window.addEventListener("resize", evt => {
 
     const delay = Math.abs(Math.round(storedTimeStamp - evt.timeStamp));
     console.log(delay);
-    
-    if ((delay > 5000)){ // when the difference between the events triggered is greater than 5s.
-        renderHTML();   
-        console.log("redering...");
-    } 
+
+    if ((delay > 10000)) { // when the difference between the events triggered is greater than 5s.
+        renderHTML();
+        // console.log("Rendering window...");
+    }
 
     storedTimeStamp = evt.timeStamp;
 });
@@ -235,14 +249,14 @@ const fetchWord = (pickedLetters, wordElId) => {
     return result;
 };// fetchWord(pickedLetters, wordId)
 
-const testLog = (isLocated, pickedLetters) => {
+// const testLog = (isLocated, pickedLetters) => {
 
-    if (isLocated) {
-        console.log(`Legal! Você encontrou: "${isLocated}"!`);
-    } else
-        console.log(`Você selecionou: "${pickedLetters}". Continue procurando...`);
+//     if (isLocated) {
+//         console.log(`Legal! Você encontrou: "${isLocated}"!`);
+//     } else
+//         console.log(`Você selecionou: "${pickedLetters}". Continue procurando...`);
 
-}; // testLog(isLocated, pickedLetters)
+// }; // testLog(isLocated, pickedLetters)
 
 const checkResult = () => {
     const score = raffledWordsList.reduce((acc, word) => {

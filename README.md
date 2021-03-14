@@ -9,14 +9,20 @@
       * Linguagem aplicada: ***javaSpript*** *puro*.
 
 ### Recursos:
-- [x] Desenvolvido com *MobileFirst*; ( 🆗 - 🤓👍 )
-- 
-- [x] Interface básica; ( 🆗 - 🤓👍 )
-- 
-- [x] Seletor de palavras; ( 🆗 - 🤓👍 )
-- 
-- [x] Animação da *caixa de letras*; ( 🆗 - 🤓👍 )
-- 
+- [x] Desenvolvido com *MobileFirst*; ( ✔ 🆗 )
+- [x] Interface básica; ( ✔ 🆗 )
+- [x] Seletor de palavras; ( ✔ 🆗 )
+- [x] Animação da *caixa de letras*; ( ✔ 🆗 )
+- [x] Diferenças entre as versões "mobile" e "desktop": ( ✔ 🆗 )
+  - [x] Tamanho da aplicação altera conforme a largua da tela do dispositivo; e ( ✔ 🆗 )
+  - [x] Qtd de palavras e tamanho da tabela são distintas entre. ( ✔ 🆗 )
+- [ ] Inserir aleatóriamente palavras nas seguintes direções: ( 👷 🔧 em andamento... 🔨  👷‍♀️)
+  - [x] Horizontal - esquerda/direita;
+  - [ ] Horizontal direita/esquerda;
+  - [ ] Vertical - cima/baixo;
+  - [ ] Vertiv - baixo/cima;
+  - [ ] diagonal direita; e 
+  - [ ] diagonal esquerda.
 - [ ] Seletor de Dificuldade; e
 - [ ] Inclusão do cronômetro.
 
