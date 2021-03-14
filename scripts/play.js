@@ -9,12 +9,12 @@ const getRandomValueIntoList = array =>
     (getRandomValue(array.length - 1) - 1) + 1; // Getting a random line between 0 and ("table" length - 1).
 
 const raffleWords = (qty) => {
-    
+
     const result = [];
     const wordsToHuntCountEl = document.querySelector('span[data-js="word-count"]');
-    
+
     for (let i = 0; i < qty; i++) {
-        const raffle = getRandomValue(wordsColectionList.length);       
+        const raffle = getRandomValue(wordsColectionList.length);
         result.push(wordsColectionList[raffle]);
     }
 
@@ -102,18 +102,35 @@ const fillTable = (table, raffledWordsList) => {
  *  DOM manipulation - BEFORE RENDER:
  * 
  **/
-const raffledWordsList = raffleWords(4);
+const raffledWordsList = isMobile() ? raffleWords(3) : raffleWords(10);
 const btnRestartEl = document.querySelector('button[data-js="restart"]');
 
 btnRestartEl.addEventListener("click", () => {
     location.reload();
 });
 
+function isMobile() {
+
+    if (window.outerWidth <= 800)
+        return true;
+
+    return false;
+
+};//isMobile()
+
 const renderHTML = () => {
 
-    const wordsTable = createTable(13);
+    const wordsTable = isMobile() ? createTable(12) : createTable(20);
     const wordsTableEl = document.getElementById("wordsTable");
     const wordsToHuntEl = document.getElementById("wordsToHunt");
+
+    if (isMobile()) {
+        wordsTableEl.classList.add("displayGrid--mobile");
+        wordsTableEl.classList.remove("displayGrid--desktop");
+    } else {
+        wordsTableEl.classList.add("displayGrid--desktop");
+        wordsTableEl.classList.remove("displayGrid--mobile");
+    }
 
     for (let i = 0; i < raffledWordsList.length; i++) {
         const li = document.createElement("li");
@@ -145,11 +162,25 @@ const renderHTML = () => {
 
             wordsTableEl.appendChild(letterContainerEl);
         }
-
     }
 };// renderHTML()
 
 renderHTML();
+
+let storedTimeStamp = 0;
+window.addEventListener("resize", evt => {
+
+    const delay = Math.abs(Math.round(storedTimeStamp - evt.timeStamp));
+    console.log(delay);
+    
+    if ((delay > 5000)){ // when the difference between the events triggered is greater than 5s.
+        renderHTML();   
+        console.log("redering...");
+    } 
+
+    storedTimeStamp = evt.timeStamp;
+});
+
 /**
  * 
  *  DOM manipulation - AFTER RENDER:
