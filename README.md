@@ -16,9 +16,9 @@
 - [x] Diferenças entre as versões "mobile" e "desktop": ( ✔ 🆗 )
   - [x] Tamanho da aplicação altera conforme a largua da tela do dispositivo; e ( ✔ 🆗 )
   - [x] Qtd de palavras e tamanho da tabela são distintas entre. ( ✔ 🆗 )
-- [ ] Inserir aleatóriamente palavras nas seguintes direções: ( 👷 🔧 em andamento... 🔨  👷‍♀️)
-  - [x] Horizontal - esquerda/direita;
-  - [ ] Horizontal direita/esquerda;
+- [ ] Inserir aleatóriamente palavras nas seguintes direções: 
+  - [x] Horizontal - esquerda/direita; ( ✔ 🆗 )
+  - [ ] Horizontal direita/esquerda; ( 👷 🔧 em andamento... 🔨  👷‍♀️)
   - [ ] Vertical - cima/baixo;
   - [ ] Vertiv - baixo/cima;
   - [ ] diagonal direita; e 

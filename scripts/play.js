@@ -50,7 +50,7 @@ const getRandomLetter = () => {
  *  */
 // };// selectDifficulty(level)
 
-const fillTable = (table, raffledWordsList) => {
+const insertWordsInTable = (table, raffledWordsList) => {
     const raffledLinesList = [];
 
     while (raffledLinesList.length < raffledWordsList.length) { //ensures that the "lines raffling" never will contains double values.
@@ -72,6 +72,9 @@ const fillTable = (table, raffledWordsList) => {
 
         });
     }
+};// insertWordsInTable(table, raffledWordsList)
+
+const fufillTable = (table) => {
 
     for (let row = 0; row < table.length; row++) {
 
@@ -98,7 +101,7 @@ const fillTable = (table, raffledWordsList) => {
 };// fillTable(raffledWordsList)
 
 const removeChildNodes = (element) => {
-    
+
     while (element.lastChild) {
 
         if (element.lastChild.dataset && element.lastChild.dataset.js === "endScreen")
@@ -110,7 +113,7 @@ const removeChildNodes = (element) => {
 
 /**
  * 
- *  DOM manipulation - BEFORE RENDER:
+ *  DOM manipulation - BEFORE RENDERING:
  * 
  **/
 const raffledWordsList = isMobile() ? raffleWords(4) : raffleWords(20);
@@ -134,7 +137,7 @@ const renderHTML = () => {
     const wordsTable = isMobile() ? createTable(14) : createTable(40);
     const wordsToHuntEl = document.getElementById("wordsToHunt");
     const wordsTableEl = document.getElementById("wordsTable");
-    
+
     removeChildNodes(wordsToHuntEl)
     removeChildNodes(wordsTableEl);
 
@@ -154,7 +157,8 @@ const renderHTML = () => {
         wordsToHuntEl.appendChild(li);
     }
 
-    fillTable(wordsTable, raffledWordsList);
+    insertWordsInTable(wordsTable, raffledWordsList);
+    fufillTable(wordsTable);
 
     for (let row = 0; row < wordsTable.length; row++) {
 
@@ -185,23 +189,20 @@ let storedTimeStamp = 0;
 window.addEventListener("resize", evt => {
 
     const delay = Math.abs(Math.round(storedTimeStamp - evt.timeStamp));
-    console.log(delay);
 
-    if ((delay > 10000)) { // when the difference between the events triggered is greater than 10s.
+    if ((delay > 10000))  // when the difference between the events triggered is greater than 10s.
         location.reload();
-        console.log("Rendering window...");
-    }
+
 
     storedTimeStamp = evt.timeStamp;
 });
 
 /**
  * 
- *  DOM manipulation - AFTER RENDER:
+ *  DOM manipulation - AFTER RENDERING:
  * 
  **/
 const letterContainers = document.querySelectorAll("#wordsTable > div");
-// let seekedWord = "";
 
 const fetchWord = (pickedLetters, wordElId) => {
 

@@ -28,6 +28,10 @@ STRUCTURE:
   src: url("../fonts/SigmarOne-Regular.ttf");
   font-family: "Sigmar One";
 }
+@font-face {
+  src: url("../fonts/Gameboi95.ttf");
+  font-family: "Game Boy 95";
+}
 
 /* @keyframes: */
 @keyframes selection {
@@ -61,6 +65,7 @@ STRUCTURE:
   --color-cream: #ffe6a7;
   --font-family-sigmaOne: "Sigmar One", "Courier New", Courier, monospace;
   --font-family-llPixel: llPixel, "Courier New", Courier, monospace;
+  --font-family-GameBoy95: "Game Boy 95", "Courier New", Courier, monospace;
 }
 
 /* GENERAL CONFIG: */
@@ -144,7 +149,10 @@ span[data-js="word-count"] {
 }
 p {
   width: 90%;
+  text-align: center;
+  font-size: 1.3rem;
   margin-bottom: 10px;
+  font-family: var(--font-family-GameBoy95);
 }
 #wordsTable {
   position: relative;
@@ -227,7 +235,12 @@ time {
   body {
     width: 80%;
     margin: 0 auto;
-    background: linear-gradient( to bottom, var(--color-main) -20%, var(--color-white) 60%, var(--color-yellow) 100% )
+    background: linear-gradient(
+      to bottom,
+      var(--color-main) -20%,
+      var(--color-white) 60%,
+      var(--color-yellow) 100%
+    );
   }
   .displayGrid--desktop {
     grid-template-columns: repeat(40, 1fr);
@@ -236,7 +249,7 @@ time {
 
   /*MAIN*/
   p {
-    text-align: center;
+    font-size: 1.5rem;
   }
   #wordsToHunt > li {
     flex: 1 1 170px;
