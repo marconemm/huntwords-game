@@ -32,11 +32,11 @@ STRUCTURE:
 /* @keyframes: */
 @keyframes selection {
   0% {
-    transform: translate(2px , 2px);
+    transform: translate(2px, 2px);
     /* transform: scale(1.2, 1.2); */
   }
   25% {
-    transform: translate(-4px , -4px);
+    transform: translate(-4px, -4px);
     /* transform: scale(1, 1); */
   }
   50% {
@@ -60,7 +60,6 @@ STRUCTURE:
   --color-cream: #ffe6a7;
   --font-family-sigmaOne: "Sigmar One", "Courier New", Courier, monospace;
   --font-family-llPixel: llPixel, "Courier New", Courier, monospace;
-  --table-size: 13;
 }
 
 /* GENERAL CONFIG: */
@@ -70,15 +69,19 @@ STRUCTURE:
   align-items: center;
   justify-content: space-around;
 }
-.displayFlex-col {
+.displayFlex--col {
   flex-flow: column wrap;
 }
 .displayGrid {
   display: grid;
-  grid-template-columns: repeat(var(--table-size), 1fr);
-  grid-template-rows: repeat((var(--table-size)), 1fr);
+  /* grid-template-columns: repeat(var(--table-size), 1fr);
+  grid-template-rows: repeat((var(--table-size)), 1fr); */
   align-items: center;
   justify-content: center;
+}
+.displayGrid--mobile {
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
 }
 .italic {
   font-style: italic;
@@ -122,7 +125,7 @@ h1 {
 }
 
 /*MAIN PAGE: */
-span[data-js="word-count"]{
+span[data-js="word-count"] {
   font-weight: bold;
 }
 #wordsToHunt,
@@ -230,6 +233,10 @@ time {
   body {
     width: 80%;
     margin: 0 auto;
+  }
+  .displayGrid--desktop {
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, 1fr);
   }
 
   /*MAIN*/
