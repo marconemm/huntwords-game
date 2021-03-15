@@ -78,20 +78,22 @@ const fufillTable = (table) => {
 
     for (let row = 0; row < table.length; row++) {
 
+        const tableRow = table[row];
+
         for (let column = 0; column < table.length; column++) {
 
-            if (table[row][column] === "")
-                table[row][column] = getRandomLetter();
+            if (tableRow[column] === "")
+                tableRow[column] = getRandomLetter();
 
-            else if (table[row].length < table.length) { //in case of if the raffle word size is smaller than the table size:
+            else if (tableRow.length < table.length) { //in case of if the raffle word size is smaller than the table size:
 
                 do {
-                    if (getRandomValue(table[row].length) % 2 === 0)
-                        table[row].push(getRandomLetter());
+                    if (getRandomValue(tableRow.length) % 2 === 0)
+                        tableRow.push(getRandomLetter()); // inserts at end.
                     else
-                        table[row] = [getRandomLetter(), ...table[row]];
+                        tableRow.unshift(getRandomLetter()); // inserts at begin.
 
-                } while (table[row].length < table.length);
+                } while (tableRow.length < table.length);
             }
             else
                 break;
@@ -149,7 +151,6 @@ const renderHTML = () => {
     const wordsTableEl = document.getElementById("wordsTable");
 
     removeChildNodes(wordsToHuntEl);
-    debugger;
     removeChildNodes(wordsTableEl);
 
     if (isMobile()) {
