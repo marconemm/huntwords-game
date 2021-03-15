@@ -25,12 +25,14 @@
         </ul>
 
         <!-- WORDS TABLE -->
-        <section class="displayGrid" id="wordsTable">
-
             <div data-js="endScreen" class="hidden">
+            <div data-js="endScreen">
                 <h3>parabéns!</h3>
                 <h4>você venceu!</h4>
-                <button data-js="restart" class="">reiniciar</button>
+                <div data-css="btnContainer">
+                    <div data-js="btn__shadow" class="btn__shadow"></div>
+                    <button data-js="restart" class="btn btn--translateY">reiniciar</button>
+                </div>
             </div>
         </section>
     </main>

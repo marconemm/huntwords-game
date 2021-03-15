@@ -165,7 +165,7 @@ p {
   font-size: 1.5rem;
   color: var(--color-text-footer);
 }
-#wordsTable > div.letterContainer:active {
+.btn--active {
   animation: selection 200ms cubic-bezier(0.75, 0.25, 0.4, 1) 2;
   text-shadow: 3px 3px 5px var(--color-gold);
 }
@@ -189,7 +189,50 @@ div[data-js="endScreen"] {
   text-align: center;
   height: fit-content;
 }
-
+div[data-css="btnContainer"] {
+  position: relative;
+}
+.btn {
+  width: 200px;
+  height: 40px;
+  background: var(--color-gold);
+  border: 2px outset var(--color-main);
+  border-radius: 5px;
+  color: var(--color-cream);
+  z-index: 1;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+.btn:hover {
+  color: var(--color-white);
+  font-weight: bold;
+  font-style: italic;
+  transition: color 150ms ease-out;
+}
+button[data-js="restart"]:active {
+  transform: translateY(-2px);
+}
+/****** Float shadow: */
+.btn--translateY:hover {
+  transform: translateY(-5px);
+  transition: transform 150ms ease-out;
+  cursor: pointer;
+}
+.btn__shadow {
+  width: 200px;
+  height: calc(40px / 1.5);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  box-shadow: 0px 45px 10px -10px var(--color-main);
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+.btn__shadow--show {
+  opacity: 1;
+}
 /*FOOTER: */
 footer {
   width: 100%;

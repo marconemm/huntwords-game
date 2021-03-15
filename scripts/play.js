@@ -118,10 +118,20 @@ const removeChildNodes = (element) => {
  **/
 const raffledWordsList = isMobile() ? raffleWords(4) : raffleWords(20);
 const btnRestartEl = document.querySelector('button[data-js="restart"]');
+const btnShadowEl = document.querySelector('div[data-js="btn__shadow"]');
+
+btnRestartEl.addEventListener("mouseenter", () => {
+    btnShadowEl.classList.add("btn__shadow--show");
+});
+
+btnRestartEl.addEventListener("mouseleave", () => {
+    btnShadowEl.classList.remove("btn__shadow--show");
+});
 
 btnRestartEl.addEventListener("click", () => {
     location.reload();
 });
+
 
 function isMobile() {
 
@@ -274,7 +284,14 @@ const checkResult = () => {
 
 };// checkResult()
 
+/**
+ * 
+ *  DOM manipulation - EVENT LISTENERS:
+ * 
+ **/
+
 let pickedLetters = "";
+
 letterContainers.forEach(container => {
     // console.log(container);
 

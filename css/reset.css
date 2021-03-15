@@ -8,7 +8,8 @@ footer,
 h1,
 h2,
 p,
-a {
+a,
+button {
   margin: 0;
   padding: 0;
   outline: none;
