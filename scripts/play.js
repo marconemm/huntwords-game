@@ -148,7 +148,8 @@ const renderHTML = () => {
     const wordsToHuntEl = document.getElementById("wordsToHunt");
     const wordsTableEl = document.getElementById("wordsTable");
 
-    removeChildNodes(wordsToHuntEl)
+    removeChildNodes(wordsToHuntEl);
+    debugger;
     removeChildNodes(wordsTableEl);
 
     if (isMobile()) {

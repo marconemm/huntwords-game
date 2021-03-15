@@ -282,7 +282,7 @@ time {
       to bottom,
       var(--color-main) -20%,
       var(--color-white) 60%,
-      var(--color-yellow) 100%
+      #ffe174 100%
     );
   }
   .displayGrid--desktop {
@@ -316,6 +316,7 @@ time {
   /*FOOTER: */
   footer {
     width: 50%;
+    background-color: #ffe174;
   }
   footer.displayFlex {
     font-size: 0.7rem;
